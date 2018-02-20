@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+	<html class="sl-root decks export offline loaded">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Serverless with serverless</title>
+
+
+		<link rel="stylesheet" type="text/css" href="lib/offline-v2.css">
+
+
+
+	</head>
+	<body class="reveal-viewport theme-font-montserrat theme-color-grey-blue">
+		<div class="reveal">
+			<div class="slides">
+				<section data-id="30a59ce559c3d8c34e0d0a6f00c62702"><div class="sl-block" data-block-type="text" style="width: 806px; left: 81px; top: 105px; height: auto;" data-block-id="38f14892fbde732bceacc4e9faa4c380"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11; white-space: normal;" data-gramm_id="af2eb4c1-90c3-03a9-6335-2634474a1bf2" data-gramm="true" data-gramm_editor="true">
+<h1>SERVERLESS WITH SERVERLESS</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" data-block-id="c2214393f383046fe784c8fbe052316c" style="height: auto; min-width: 30px; min-height: 30px; width: 600px; left: 180px; top: 381px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-gramm_id="47dc717a-25c4-accf-4f6d-e0a462517abc" data-gramm="true" data-gramm_editor="true">
+<p>Created by Shawn Aukstakalnis</p>
+</div></div></section><section data-id="c2a56cc9e8cc12c43c448800acbd5ae4"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="52ff613071e50f75a110a631b28b211e"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>OVERVIEW</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 263px; height: auto;" data-block-id="2300a9f4180257c62f907c5a19da9835"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li class="fragment fade-up" data-fragment-index="0">What is Serverless architecture?</li>
+	<li class="fragment fade-up" data-fragment-index="1">Benefits and Trade-offs of Serverless</li>
+	<li class="fragment fade-up" data-fragment-index="2">Serverless Workflow</li>
+</ul>
+</div></div></section><section data-id="b78188d4c8e760c05bc8eed311a0c8b0"><div class="sl-block" data-block-type="image" data-block-id="62f775b5c448ea19850a02042705566d" style="min-width: 30px; min-height: 30px; width: 95px; height: 107px; left: 20px; top: 264px;"><div class="sl-block-content" style="z-index: 10;"><img data-natural-width="1024" data-natural-height="1155" style="" data-lazy-loaded="" data-src="serverless-with-serverless/c64b73b8f11b44ac26eb42de09c96bd9.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="1f2e26c20e7e8ac51274a0350d139da9" style="min-width: 30px; min-height: 30px; width: 112px; height: 112px; left: 211px; top: 264px;"><div class="sl-block-content" style="z-index: 11;"><img data-natural-width="512" data-natural-height="512" style="" data-lazy-loaded="" data-src="serverless-with-serverless/f5409abc28692c34ea050339f7ff05c5.png"></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="9d3aa9bda169c8d67d4a1798acebc65f" style="min-width: 4px; min-height: 4px; width: 215px; height: 202px; left: 403px; top: 224px;"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(0, 0, 0)" data-shape-stretch="true" style="z-index: 12;" data-shape-stroke-color="#000000" data-shape-stroke-width="4" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 202"><defs><clippath id="shape-mask-1-1519077666772"><rect width="215" height="202"></rect></clippath></defs><rect width="215" height="202" clip-path="url(#shape-mask-1-1519077666772)" class="shape-element" fill="rgb(0, 0, 0)" stroke="#000000" stroke-width="8"></rect></svg></div></div>
+<div class="sl-block" data-block-type="code" data-block-id="24b249cd6d19a640e90498aa846b06e5" style="min-width: 30px; min-height: 30px; width: 177px; height: 164px; left: 422px; top: 245px;"><div class="sl-block-style" style="z-index: 13; transform: rotate(360deg);"><div class="sl-block-content" style="z-index: 13; font-size: 65%;"><pre><code>
+foldl (&lt;&gt;) (return 0) 
+  [async $ getURL url 
+  &gt;&gt;=getResponseBody 
+  &gt;&gt;= 
+  return . length .words 
+  | url &lt;- 
+  [ "transfix.io", 
+  "dogecoin.com/"]
+  ]</code></pre></div></div></div>
+<div class="sl-block" data-block-type="table" data-block-id="778996a7399aa4fff3d9e73ace497a7c" style="height: auto; min-width: 120px; min-height: 30px; width: 176px; left: 716px; top: 245px;"><div class="sl-block-content" style="z-index: 15; font-size: 35%; background-color: rgb(102, 102, 102);" data-table-padding="3px" data-table-rows="8"><table><tbody>
+<tr>
+<th style="padding: 3px;">id</th>
+<th style="padding: 3px; width: 53px;">amount</th>
+<th style="padding: 3px;">price</th>
+</tr>
+<tr>
+<td style="padding: 3px;">100</td>
+<td style="padding: 3px; width: 53px;">535</td>
+<td style="padding: 3px;">0.123</td>
+</tr>
+<tr>
+<td style="padding: 3px;">101</td>
+<td style="padding: 3px; width: 53px;">453</td>
+<td style="padding: 3px;">0.124</td>
+</tr>
+<tr>
+<td style="padding: 3px;">102</td>
+<td style="padding: 3px; width: 53px;">23</td>
+<td style="padding: 3px;">0.111</td>
+</tr>
+<tr>
+<td style="padding: 3px;">103</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.1</td>
+</tr>
+<tr>
+<td style="padding: 3px;">104</td>
+<td style="padding: 3px; width: 53px;">424</td>
+<td style="padding: 3px;">0.23</td>
+</tr>
+<tr>
+<td style="padding: 3px;">105</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.75</td>
+</tr>
+<tr>
+<td style="padding: 3px;">106</td>
+<td style="padding: 3px; width: 53px;">4242</td>
+<td style="padding: 3px;">1.5</td>
+</tr>
+</tbody></table></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 215px; height: 202px; left: 696px; top: 224px;" data-block-id="2815fa427e654b7725fa076b83515585"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgb(0, 0, 0)" data-shape-stretch="true" style="z-index: 14;" data-shape-stroke-color="#000000" data-shape-stroke-width="4" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 202"><defs><clippath id="shape-mask-2-1519077666994"><rect width="215" height="202"></rect></clippath></defs><rect width="215" height="202" clip-path="url(#shape-mask-2-1519077666994)" class="shape-element" fill="rgb(0, 0, 0)" stroke="#000000" stroke-width="8"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="c0e3bb4f5e1d1a040aa3bbbbfb48a9ee" style="height: auto; min-width: 30px; min-height: 30px; width: 94px; left: 20px; top: 389px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 16;">
+<p>user</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 94px; left: 220px; top: 387px;" data-block-id="b14103348d1bf50d9d0923382924be44"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17;">
+<p>client</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 194px; left: 414px; top: 438px;" data-block-id="727c01df126f601feb022e6d93e5ac19"><div class="sl-block-content fragment fade-out" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 18;" data-fragment-index="0">
+<p>Web Server</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 241px; left: 684px; top: 438px;" data-block-id="f12f445e69e9836342cb8d6ce521dbe5"><div class="sl-block-content fragment fade-out" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 19;" data-fragment-index="0">
+<p>Database Server</p>
+</div></div>
+<div class="sl-block" data-block-type="line" data-block-id="35ba226f2653244648a88a73a43d4513" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 123px; top: 289px;"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-172" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 20;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="81" height="1" viewbox="-253 74 81 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-174" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-174" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-174,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 330px; top: 289px;" data-block-id="70d08b849badfaed16487369e371ab49"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 21;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="67" height="1" viewbox="-253 74 67 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 623px; top: 289px;" data-block-id="c7b2e84b047d16363f65698731e13812"><div class="sl-block-content" data-line-x1="-257" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 22;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="71" height="1" viewbox="-257 74 71 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-257" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-257" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 625px; top: 346px;" data-block-id="999c7c12f9cef2a1738bb36e5001b6bf"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-187" data-line-y2="74" data-line-color="#000000" data-line-start-type="line-arrow" data-line-end-type="none" style="z-index: 23;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="66" height="1" viewbox="-253 74 66 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-251" y1="74" x2="-187" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-251" y1="74" x2="-187" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-251,74) rotate(90)" d="M -6 -6 L 0 0 L 6 -6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 323px; top: 346px;" data-block-id="b9a8a1d5d3ad8534e8ab15e0841969ea"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-179" data-line-y2="74" data-line-color="#000000" data-line-start-type="line-arrow" data-line-end-type="none" style="z-index: 24;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="74" height="1" viewbox="-253 74 74 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-251" y1="74" x2="-179" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-251" y1="74" x2="-179" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-251,74) rotate(90)" d="M -6 -6 L 0 0 L 6 -6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; min-width: 1px; min-height: 1px; left: 123px; top: 345px;" data-block-id="aa7f4cbd9dcae64c60bb6950eeab6251"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-172" data-line-y2="74" data-line-color="#000000" data-line-start-type="line-arrow" data-line-end-type="none" style="z-index: 25;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="81" height="1" viewbox="-253 74 81 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-251" y1="74" x2="-172" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-251" y1="74" x2="-172" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-251,74) rotate(90)" d="M -6 -6 L 0 0 L 6 -6"></path></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 194px; left: 414px; top: 438px;" data-block-id="cf226b2b12e6af5dd7777a2110ad442f"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 26;" data-fragment-index="1">
+<p>Function(s)</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 271px; left: 669px; top: 438px;" data-block-id="dd971224cc115c1832cb6cdea04bb605"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 27;" data-fragment-index="1">
+<p>Backend Service</p>
+</div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="9784a93105c6095a6aa2165da6787ffb" style="min-width: 4px; min-height: 4px; width: 215px; height: 202px; left: 403px; top: 224px;"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 28;" data-shape-stroke-color="#888888" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 202"><defs><clippath id="shape-mask-3-1519077667021"><rect width="215" height="202"></rect></clippath></defs><rect width="215" height="202" clip-path="url(#shape-mask-3-1519077667021)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#888888" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 215px; height: 202px; left: 696px; top: 224px;" data-block-id="520a2613e0f0235422d50aa54dc07146"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 30;" data-shape-stroke-color="#888888" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 202"><defs><clippath id="shape-mask-4-1519077667024"><rect width="215" height="202"></rect></clippath></defs><rect width="215" height="202" clip-path="url(#shape-mask-4-1519077667024)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#888888" stroke-width="2"></rect></svg></div></div></section><section data-id="2a57d92a4875790a43feb2afe1abce84">
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 75px; top: 263px; height: auto;" data-block-id="7322d23ef96edd8aa9fa437f1f9f97e5"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11; text-align: left; border-width: 1px;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<p><span style="font-size:1.4em">Backend Services are third-party cloud based application components.</span></p>
+</div></div></section><section data-id="3126adf84ee3fee2b4f8f66dc07345b9"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="1bf38af55581c8d76e63aa89b1084379"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>Backend Services:</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 263px; height: auto;" data-block-id="5571be9ba4cf3a5662c915de29315326"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li class="">Database (Firebase, DynamoDB)</li>
+	<li class="fragment fade-up" data-fragment-index="0">Authentication (Cognito, Auth0)</li>
+	<li class="fragment fade-up" data-fragment-index="1">File Storage (S3)</li>
+	<li class="fragment fade-up" data-fragment-index="2">API Proxy (API Gateway)</li>
+	<li class="fragment fade-up" data-fragment-index="3">Notifications (Mailgun, Twilio)</li>
+	<li class="fragment fade-up" data-fragment-index="4">Machine Learning (Google ML, SageMaker)</li>
+</ul>
+</div></div></section><section data-id="3cc50ba631dc142be44d1275243f6909"><div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 266px; height: auto;" data-block-id="6102e36dd3b904c11f07437c0cc3d33a"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 10; white-space: normal;">
+<p><span style="font-size:1.4em">Functions are code you can deploy and run without managing servers.</span></p>
+</div></div></section><section data-id="8716f2eb2f0727c9241c9676ed16be8f"><div class="sl-block" data-block-type="shape" data-block-id="ad3e4ca32b6bc055c171e3409fdedbb1" style="min-width: 4px; min-height: 4px; width: 259px; height: 402px; left: 80px; top: 114px;"><div class="sl-block-content" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 11;" data-shape-stroke-color="#222222" data-shape-stroke-width="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 259 402"><defs><clippath id="shape-mask-5-1519077670347"><rect width="259" height="402"></rect></clippath></defs><rect width="259" height="402" clip-path="url(#shape-mask-5-1519077670347)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#222222" stroke-width="10"></rect></svg></div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 177px; height: 135px; left: 117px; top: 162px;" data-block-id="e1d60b1a889ed12f6a552f5aba7eb375"><div class="sl-block-style" style="z-index: 12; transform: rotate(360deg);"><div class="sl-block-content" style="z-index: 12; font-size: 65%;"><pre><code>
+foldl (&lt;&gt;) (return 0) 
+  [async $ getURL url 
+  &gt;&gt;=getResponseBody 
+  &gt;&gt;= 
+  return . length .words 
+  | url &lt;- 
+  [ "transfix.io", 
+  "dogecoin.com/"]
+  ]</code></pre></div></div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 177px; height: 135px; left: 117px; top: 333px;" data-block-id="d33e5aec4492b00618bff77f0217312d"><div class="sl-block-style" style="z-index: 13; transform: rotate(360deg);"><div class="sl-block-content" style="z-index: 13; font-size: 65%;"><pre><code>fibs = 1 : 1 : 
+zipWith (+) 
+fibs (tail fibs)</code></pre></div></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="5499ee927581ce3e0a5b8ce0fda31153" style="height: auto; min-width: 30px; min-height: 30px; width: 234px; left: 89px; top: 51px;"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 14;">
+<p>PLATFORM</p>
+</div></div>
+<div class="sl-block" data-block-type="code" style="min-width: 30px; min-height: 30px; width: 177px; height: 135px; left: 563px; top: 164px;" data-block-id="66ad3c7b2310bc6d8e13c214d67210a7"><div class="sl-block-style" style="z-index: 15; transform: rotate(360deg);"><div class="sl-block-content fragment fade-right" style="z-index: 15; font-size: 65%;" data-fragment-index="1"><pre><code>
+foldl (&lt;&gt;) (return 0) 
+  [async $ getURL url 
+  &gt;&gt;=getResponseBody 
+  &gt;&gt;= 
+  return . length .words 
+  | url &lt;- 
+  [ "transfix.io", 
+  "dogecoin.com/"]
+  ]</code></pre></div></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="24f2d1fc96cca27dcd2914b7381080e0" style="min-width: 4px; min-height: 4px; width: 238px; height: 183px; left: 532px; top: 140px;"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 10;" data-shape-stroke-color="#888888" data-shape-stroke-width="2" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 238 183"><defs><clippath id="shape-mask-6-1519077670403"><rect width="238" height="183"></rect></clippath></defs><rect width="238" height="183" clip-path="url(#shape-mask-6-1519077670403)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#888888" stroke-width="4"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 234px; left: 532px; top: 51px;" data-block-id="cf0b49f02c25b7d9a7b4ba2a337c3a69"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 17;" data-gramm_id="52efd5a0-bb43-cf7d-79b0-8f892fd5b1aa" data-gramm="true" data-gramm_editor="true" data-fragment-index="0">
+<p>CONTAINER</p>
+</div></div></section><section data-id="e1724c080f4604851e55342b833857d7"><div class="sl-block" data-block-type="image" style="width: 95px; height: 107px; left: 20px; top: 266px;" data-block-id="16259bd11c900cf1d226200e333e5b6b"><div class="sl-block-content" style="z-index: 10;"><img data-natural-width="1024" data-natural-height="1155" style="" data-lazy-loaded="" data-src="serverless-with-serverless/c64b73b8f11b44ac26eb42de09c96bd9.png"></div></div>
+<div class="sl-block" data-block-type="image" style="width: 112px; height: 112px; left: 211px; top: 266px;" data-block-id="984d93569b8aa3d800a694eb7c731d01"><div class="sl-block-content" style="z-index: 11;"><img data-natural-width="512" data-natural-height="512" style="" data-lazy-loaded="" data-src="serverless-with-serverless/f5409abc28692c34ea050339f7ff05c5.png"></div></div>
+
+<div class="sl-block" data-block-type="code" style="width: 177px; height: 164px; left: 415px; top: 240px;" data-block-id="bdc5b8fb0f8e805debab2842a3d8de4c"><div class="sl-block-style" style="z-index: 12; transform: rotate(360deg);"><div class="sl-block-content fragment fade-out" style="z-index: 12; font-size: 65%;" data-fragment-index="1"><pre><code>
+foldl (&lt;&gt;) (return 0) 
+  [async $ getURL url 
+  &gt;&gt;=getResponseBody 
+  &gt;&gt;= 
+  return . length .words 
+  | url &lt;- 
+  [ "transfix.io", 
+  "dogecoin.com/"]
+  ]</code></pre></div></div></div>
+<div class="sl-block" data-block-type="table" style="height: auto; width: 176px; left: 732px; top: 242px;" data-block-id="b6fd3bde872c71e1243dabc77c19cf6c"><div class="sl-block-content fragment fade-out" style="z-index: 13; font-size: 35%; background-color: rgb(102, 102, 102);" data-table-padding="3px" data-table-rows="8" data-fragment-index="1"><table><tbody>
+<tr>
+<th style="padding: 3px;">id</th>
+<th style="padding: 3px; width: 53px;">amount</th>
+<th style="padding: 3px;">price</th>
+</tr>
+<tr>
+<td style="padding: 3px;">100</td>
+<td style="padding: 3px; width: 53px;">535</td>
+<td style="padding: 3px;">0.123</td>
+</tr>
+<tr>
+<td style="padding: 3px;">101</td>
+<td style="padding: 3px; width: 53px;">453</td>
+<td style="padding: 3px;">0.124</td>
+</tr>
+<tr>
+<td style="padding: 3px;">102</td>
+<td style="padding: 3px; width: 53px;">23</td>
+<td style="padding: 3px;">0.111</td>
+</tr>
+<tr>
+<td style="padding: 3px;">103</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.1</td>
+</tr>
+<tr>
+<td style="padding: 3px;">104</td>
+<td style="padding: 3px; width: 53px;">424</td>
+<td style="padding: 3px;">0.23</td>
+</tr>
+<tr>
+<td style="padding: 3px;">105</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.75</td>
+</tr>
+<tr>
+<td style="padding: 3px;">106</td>
+<td style="padding: 3px; width: 53px;">4242</td>
+<td style="padding: 3px;">1.5</td>
+</tr>
+</tbody></table></div></div>
+
+
+
+
+
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 120px; top: 319px;" data-block-id="e926e8c9bfdb1e03ce79171394f33af7"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-172" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 16;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="81" height="1" viewbox="-253 74 81 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-174" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-174" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-174,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 330px; top: 318px;" data-block-id="7505fc82bbe18b6f667a630f132deac1"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 17;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="67" height="1" viewbox="-253 74 67 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 626px; top: 323px;" data-block-id="d5e8b35d1ae4c3cf26075c59b51b12fd"><div class="sl-block-content" data-line-x1="-257" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 18;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="71" height="1" viewbox="-257 74 71 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-257" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-257" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+
+
+
+
+
+<div class="sl-block" data-block-type="shape" style="width: 202px; height: 188px; left: 403px; top: 228px;" data-block-id="68389b1f132050c6ca1620fb53cbdf89"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 24;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 202 188"><defs><clippath id="shape-mask-7-1519077671193"><rect width="202" height="188"></rect></clippath></defs><rect width="202" height="188" clip-path="url(#shape-mask-7-1519077671193)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 215px; height: 188px; left: 712px; top: 226px;" data-block-id="56734a18eceb290b93f33de12d8ab64d"><div class="sl-block-content fragment fade-out" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 23;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 188"><defs><clippath id="shape-mask-8-1519077671196"><rect width="215" height="188"></rect></clippath></defs><rect width="215" height="188" clip-path="url(#shape-mask-8-1519077671196)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" data-block-id="fc891fd86dd555c0b7cec2b372b18b7d" style="min-width: 4px; min-height: 4px; width: 240px; height: 84px; left: 403px; top: 85px;"><div class="sl-block-content fragment fade-up" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 25;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 240 84"><defs><clippath id="shape-mask-9-1519077671199"><rect width="240" height="84"></rect></clippath></defs><rect width="240" height="84" clip-path="url(#shape-mask-9-1519077671199)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" data-block-id="d67faa815944b8faea9480c01756a391" style="height: auto; min-width: 30px; min-height: 30px; width: 240px; left: 403px; top: 88px;"><div class="sl-block-content fragment fade-up" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 26;" data-gramm_id="434cea5b-ea0f-b6ad-e4ae-7803da14a3be" data-gramm="true" data-gramm_editor="true" data-fragment-index="0">
+<p>Authentication Service</p>
+</div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 330px; top: 169px;" data-block-id="7ca5f199c34b3e766172d2be67a951e2"><div class="sl-block-content fragment" data-line-x1="-213" data-line-y1="121" data-line-x2="-147" data-line-y2="34" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 27;" data-fragment-index="0"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="66" height="87" viewbox="-213 34 66 87"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-213" y1="121" x2="-148" y2="36"></line><line stroke="#000000" stroke-width="2" x1="-213" y1="121" x2="-148" y2="36"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-148,36) rotate(37.185)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="table" style="height: auto; width: 176px; left: 415px; top: 459px;" data-block-id="5bf30dc7a36abcd11562f91796eb180b"><div class="sl-block-content fragment" style="z-index: 28; font-size: 35%; background-color: rgb(102, 102, 102);" data-table-padding="3px" data-table-rows="8" data-fragment-index="1"><table><tbody>
+<tr>
+<th style="padding: 3px;">id</th>
+<th style="padding: 3px; width: 53px;">amount</th>
+<th style="padding: 3px;">price</th>
+</tr>
+<tr>
+<td style="padding: 3px;">100</td>
+<td style="padding: 3px; width: 53px;">535</td>
+<td style="padding: 3px;">0.123</td>
+</tr>
+<tr>
+<td style="padding: 3px;">101</td>
+<td style="padding: 3px; width: 53px;">453</td>
+<td style="padding: 3px;">0.124</td>
+</tr>
+<tr>
+<td style="padding: 3px;">102</td>
+<td style="padding: 3px; width: 53px;">23</td>
+<td style="padding: 3px;">0.111</td>
+</tr>
+<tr>
+<td style="padding: 3px;">103</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.1</td>
+</tr>
+<tr>
+<td style="padding: 3px;">104</td>
+<td style="padding: 3px; width: 53px;">424</td>
+<td style="padding: 3px;">0.23</td>
+</tr>
+<tr>
+<td style="padding: 3px;">105</td>
+<td style="padding: 3px; width: 53px;">242</td>
+<td style="padding: 3px;">0.75</td>
+</tr>
+<tr>
+<td style="padding: 3px;">106</td>
+<td style="padding: 3px; width: 53px;">4242</td>
+<td style="padding: 3px;">1.5</td>
+</tr>
+</tbody></table></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 330px; top: 385px;" data-block-id="a7615be9fd6dc4ded0f044eccc1c8677"><div class="sl-block-content fragment" data-line-x1="-241" data-line-y1="-5" data-line-x2="-175" data-line-y2="58" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 29;" data-fragment-index="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="66" height="63" viewbox="-241 -5 66 63"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-241" y1="-5" x2="-176" y2="57"></line><line stroke="#000000" stroke-width="2" x1="-241" y1="-5" x2="-176" y2="57"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-176,57) rotate(133.668)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 626px; top: 420px;" data-block-id="3312414bc714d7ee9303455c2e1d39aa"><div class="sl-block-content fragment" data-line-x1="-285" data-line-y1="-173" data-line-x2="-214" data-line-y2="-218" data-line-color="#000000" data-line-start-type="line-arrow" data-line-end-type="none" style="z-index: 30;" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="71" height="45" viewbox="-285 -218 71 45"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-283" y1="-174" x2="-214" y2="-218"></line><line stroke="#000000" stroke-width="2" x1="-283" y1="-174" x2="-214" y2="-218"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-283,-174) rotate(57.633)" d="M -6 -6 L 0 0 L 6 -6"></path></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 201px; height: 181px; left: 403px; top: 449px;" data-block-id="8b0e1422169b5cc3bb14e40696d962a6"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 31;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 201 181"><defs><clippath id="shape-mask-10-1519077671219"><rect width="201" height="181"></rect></clippath></defs><rect width="201" height="181" clip-path="url(#shape-mask-10-1519077671219)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="shape" style="min-width: 4px; min-height: 4px; width: 201px; height: 71px; left: 403px; top: 285px;" data-block-id="52a0082a33efdcb2e4613edeb93d679f"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 32;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 201 71"><defs><clippath id="shape-mask-11-1519077671221"><rect width="201" height="71"></rect></clippath></defs><rect width="201" height="71" clip-path="url(#shape-mask-11-1519077671221)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; min-width: 30px; min-height: 30px; width: 203px; left: 402px; top: 303px;" data-block-id="688018524cf01775df76a5a189cd90f6"><div class="sl-block-content fragment" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 33;" data-gramm_id="434cea5b-ea0f-b6ad-e4ae-7803da14a3be" data-gramm="true" data-gramm_editor="true" data-fragment-index="1">
+<p>API Gateway</p>
+</div></div>
+<div class="sl-block" data-block-type="code" style="width: 177px; height: 164px; left: 731px; top: 238px;" data-block-id="383a6e90cc6af594b30473e8b322ac64"><div class="sl-block-style" style="z-index: 34; transform: rotate(360deg);"><div class="sl-block-content fragment" style="z-index: 34; font-size: 65%;" data-fragment-index="1"><pre><code>
+foldl (&lt;&gt;) (return 0) 
+  [async $ getURL url 
+  &gt;&gt;=getResponseBody 
+  &gt;&gt;= 
+  return . length .words 
+  | url &lt;- 
+  [ "transfix.io", 
+  "dogecoin.com/"]
+  ]</code></pre></div></div></div>
+<div class="sl-block" data-block-type="shape" style="width: 215px; height: 188px; left: 712px; top: 226px;" data-block-id="39df4df451979b48d3f115ccd84986d4"><div class="sl-block-content fragment" data-shape-type="rect" data-shape-fill-color="rgba(0, 0, 0, 0)" data-shape-stretch="true" style="z-index: 35;" data-shape-stroke-color="#000000" data-shape-stroke-width="1" data-fragment-index="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100%" preserveaspectratio="none" viewbox="0 0 215 188"><defs><clippath id="shape-mask-12-1519077671241"><rect width="215" height="188"></rect></clippath></defs><rect width="215" height="188" clip-path="url(#shape-mask-12-1519077671241)" class="shape-element" fill="rgba(0, 0, 0, 0)" stroke="#000000" stroke-width="2"></rect></svg></div></div></section><section data-id="222f9739d77af606a95333657bb3483d"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="9b130184a8c4fcaa0615c74a88f7ae89"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>FOCUS</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 263px; height: auto;" data-block-id="1c86005dfe8c5870a91764dafd86c8c0"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li class="fade-up fragment" data-fragment-index="0">Don't spend time managing infrastructure.</li>
+	<li class="fade-up fragment" data-fragment-index="1">Don't spend time writing standard components (Auth, API routing/validation).</li>
+	<li class="fade-up fragment" data-fragment-index="2">Write code and design architecture to solve business problems.</li>
+	<li class="fade-up fragment" data-fragment-index="3">Allows for innovation and faster movement.</li>
+</ul>
+</div></div></section><section data-id="1b66c61914f5f15e4e8a5f52810d144b"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="666c308884648d43051bd7f4850552f4"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>SAVINGS</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 263px; height: auto;" data-block-id="8bfa0c34fc156406c5f240fb06ecf10c"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<p>Many <a href="https://gigaom.com/2013/11/30/the-sorry-state-of-server-utilization-and-the-impending-post-hypervisor-era/" target="_blank">studies</a> suggest most servers are less than 20% utilized. In serverless you only pay for computing you actually use.</p>
+</div></div></section><section data-id="fe353ed5681f07b1c83505857bdd7fcf"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="7ab1812628089ebfdf8b4c828d152f54"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>SCALIBILITY</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 74px; top: 263px; height: auto;" data-block-id="6383563371bb8e94fea119456c2e58fb"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<p>Scaling up and down is automatic and managed by the provider.</p>
+</div></div></section><section data-id="4a17a905b131c657a77e5a9c62367006"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="08de66c05cf9f825b7064457d7b98afd"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 11;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>PROTOTYPING</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 263px; height: auto;" data-block-id="0b980f103714c4ca8e6421a25c28ec7b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li>Little / no cost since you only pay for what you use.</li>
+	<li>First million requests are free with AWS Lambda.</li>
+</ul>
+</div></div></section><section data-id="97fb11234d9884264215b284c740fe6e"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="bea54af2d83c4d532f170a930ffb91cc"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>OTHER BENEFITS</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 263px; height: auto;" data-block-id="4668ef46d3f6c7897f4f5d7ced190e23"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li class="fade-up fragment" data-fragment-index="0">Multi-Region / Canary Deploys</li>
+	<li class="fade-up fragment" data-fragment-index="1">Polygot</li>
+	<li class="fade-up fragment" data-fragment-index="2">Greener computing</li>
+</ul>
+</div></div></section><section data-id="157a9b8d7e6d01622e6e73efffc6cf3b"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 136px; height: auto;" data-block-id="a21ccdfa482170924ae18f064093ff92"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>DRAWBACKS</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 263px; height: auto;" data-block-id="94ae307a0fc71c23df64ee7b9e4f9f00"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<ul>
+	<li class="fade-up fragment" data-fragment-index="0">Function Limitations (cold start / max duration)</li>
+	<li class="fade-up fragment" data-fragment-index="1">Vendor lock-in</li>
+	<li class="fade-up fragment" data-fragment-index="2">Do not have access to special hardware</li>
+	<li class="fade-up fragment" data-fragment-index="3">Increased remote calls</li>
+	<li class="fade-up fragment" data-fragment-index="4">Immature Tooling (Testing, deploying, debugging, monitoring)</li>
+</ul>
+</div></div></section><section data-id="91f710be7e6afbce025f813e62436ac5"><div class="sl-block" data-block-type="text" style="width: 960px; left: 0px; top: 173px; height: auto;" data-block-id="44f3d4b3be52005828663b1f34ccdbdd"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;" data-gramm_id="ce3b8d24-3e0f-cbca-35ce-fb49beffcdaa" data-gramm="true" data-gramm_editor="true">
+<h2>SEVRERLESS THE FRAMEWORK</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 76px; top: 263px; height: auto;" data-block-id="6215418434d40d14d665db26c0f683b3"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;" data-gramm_id="1462d8ad-2109-8ae4-60a4-787f91e4a333" data-gramm="true" data-gramm_editor="true">
+<p><span style="color:rgb(255, 255, 255)">Open-source CLI for building serverless architectures.</span></p>
+</div></div></section><section data-id="61f7a653d1850179abf256b2fcad22a5"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 189px; height: auto;" data-block-id="07225b1a143f804dec3facc01541654e"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Title Text" style="z-index: 10;">
+<h2>DOGECOIN TRACKER</h2>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 263px; height: auto;" data-block-id="be21e66b19bd17e6e5413c78db09dee1"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 11;">
+<ul>
+	<li>Can get current USD price of Dogecoin</li>
+	<li>Store price history</li>
+</ul>
+</div></div></section><section data-id="44e1596b02ebc4b0a2387d0a1c9f5784"><div class="sl-block" data-block-type="image" style="width: 95px; height: 107px; left: 31px; top: 44px;" data-block-id="283b3a55ce1b8f59fed37f89222984c2"><div class="sl-block-content" style="z-index: 10;"><img data-natural-width="1024" data-natural-height="1155" style="" data-lazy-loaded="" data-src="serverless-with-serverless/c64b73b8f11b44ac26eb42de09c96bd9.png"></div></div>
+<div class="sl-block" data-block-type="image" style="width: 112px; height: 112px; left: 222px; top: 44px;" data-block-id="10c1a5720e7f244e4b5d7555c1a5bef5"><div class="sl-block-content" style="z-index: 11;"><img data-natural-width="512" data-natural-height="512" style="" data-lazy-loaded="" data-src="serverless-with-serverless/f5409abc28692c34ea050339f7ff05c5.png"></div></div>
+
+
+
+
+<div class="sl-block" data-block-type="text" style="height: auto; width: 94px; left: 31px; top: 169px;" data-block-id="469eba0b8efdb2531f84b5574f984975"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 12;">
+<p>user</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 94px; left: 231px; top: 167px;" data-block-id="d7be14803a81421cb32b9aa0f229a0fd"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 13;">
+<p>client</p>
+</div></div>
+
+
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 132px; top: 100px;" data-block-id="045b01f01719a6b6a29bba5f3e661234"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-172" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 14;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="81" height="1" viewbox="-253 74 81 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-174" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-174" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-174,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 355px; top: 100px;" data-block-id="0846d652d24bf7f5b5dbd2670189a1ea"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 15;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="67" height="1" viewbox="-253 74 67 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 628px; top: 100px;" data-block-id="e6e5fefe117c77c692ee882531dc9505"><div class="sl-block-content" data-line-x1="-257" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 16;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="71" height="1" viewbox="-257 74 71 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-257" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-257" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 595px; top: 179px;" data-block-id="abe9196dfb24f416e89affb8eccbe169"><div class="sl-block-content" data-line-x1="-316" data-line-y1="18" data-line-x2="-190" data-line-y2="-72" data-line-color="#000000" data-line-start-type="line-arrow" data-line-end-type="none" style="z-index: 17;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="126" height="90" viewbox="-316 -72 126 90"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-314" y1="17" x2="-190" y2="-72"></line><line stroke="#000000" stroke-width="2" x1="-314" y1="17" x2="-190" y2="-72"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-314,17) rotate(54.462)" d="M -6 -6 L 0 0 L 6 -6"></path></svg></div></div>
+
+
+
+
+
+<div class="sl-block" data-block-type="image" data-block-id="63bde195cc26ed9cbf3c3a7182e4eeff" style="min-width: 30px; min-height: 30px; width: 120px; height: 144px; left: 721px; top: 35px;"><div class="sl-block-content" style="z-index: 18;"><img data-natural-width="342" data-natural-height="412" style="" data-lazy-loaded="" data-src="serverless-with-serverless/e7e38eb90adefbb8ae6a7c765efab6d2.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="75e052353222421b109b08166b832cab" style="min-width: 30px; min-height: 30px; width: 104px; height: 118px; left: 464px; top: 269px;"><div class="sl-block-content" style="z-index: 19;"><img style="" data-natural-width="641" data-natural-height="724" data-lazy-loaded="" data-src="serverless-with-serverless/de8aca00b1f3923128f9a35dd4abcea9.png"></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="0f9378aed3482bc56e5952f70328feb8" style="min-width: 30px; min-height: 30px; width: 120px; height: 144px; left: 454px; top: 35px;"><div class="sl-block-content" style="z-index: 20;"><img data-natural-width="342" data-natural-height="412" style="" data-lazy-loaded="" data-src="serverless-with-serverless/182149dbd7d9303777929691396b5a7f.png"></div></div>
+<div class="sl-block" data-block-type="image" style="min-width: 30px; min-height: 30px; width: 88px; height: 106px; left: 472px; top: 508px;" data-block-id="fb27d7af68c26f2674ed0764def24533"><div class="sl-block-content" style="z-index: 21;"><img data-natural-width="342" data-natural-height="412" style="" data-lazy-loaded="" data-src="serverless-with-serverless/e7e38eb90adefbb8ae6a7c765efab6d2.png"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 162px; left: 433px; top: 393px;" data-block-id="142dd11f8f2aba61f942117449d26c9b"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 22;">
+<p>DynamoDB</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 209px; left: 411px; top: 187px;" data-block-id="3307dc191069dc1b82a06bb52bfed18d"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 23;">
+<p>API Gateway</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 209px; left: 671px; top: 187px;" data-block-id="6b8e2d440eb6a64848aa1e6c59cee295"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 24;">
+<p>getPrice</p>
+</div></div>
+<div class="sl-block" data-block-type="image" data-block-id="ec3875d4fc3abb5631fc7919e7678bd4" style="min-width: 30px; min-height: 30px; width: 97px; height: 127px; left: 230px; top: 497px;"><div class="sl-block-content" style="z-index: 25;"><img data-natural-width="279" data-natural-height="364" style="" data-lazy-loaded="" data-src="serverless-with-serverless/ce8ab458a64dbf35cc6959eb32cb0309.png"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 171px; left: 184px; top: 630px;" data-block-id="5fb9b9b24a343015bfdbd13868c06acf"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 26;">
+<p>Cloudwatch</p>
+</div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 171px; left: 429px; top: 630px;" data-block-id="478f9b2b813266f373455c5a61210228"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 28;">
+<p>updatePrice</p>
+</div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 355px; top: 571px;" data-block-id="9d72b1026596400fff9f88a4a90f554f"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 29;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="67" height="1" viewbox="-253 74 67 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 620px; top: 570px;" data-block-id="4909f761809db41455f4e22800911d09"><div class="sl-block-content" data-line-x1="-253" data-line-y1="74" data-line-x2="-186" data-line-y2="74" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 30;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="67" height="1" viewbox="-253 74 67 1"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-253" y1="74" x2="-188" y2="74"></line><line stroke="#000000" stroke-width="2" x1="-253" y1="74" x2="-188" y2="74"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-188,74) rotate(90)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="line" style="width: auto; height: auto; left: 514px; top: 441px;" data-block-id="4343ca88babf963e964e4b9e8f213786"><div class="sl-block-content" data-line-x1="-232" data-line-y1="84" data-line-x2="-232" data-line-y2="35" data-line-color="#000000" data-line-start-type="none" data-line-end-type="line-arrow" style="z-index: 31;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" preserveaspectratio="xMidYMid" width="1" height="49" viewbox="-232 35 1 49"><line stroke="rgba(0,0,0,0)" stroke-width="15" x1="-232" y1="84" x2="-232" y2="37"></line><line stroke="#000000" stroke-width="2" x1="-232" y1="84" x2="-232" y2="37"></line><path style="fill: rgba(0,0,0,0);" stroke="#000000" stroke-width="2" transform="translate(-232,37) rotate(0)" d="M 6 6 L 0 0 L -6 6"></path></svg></div></div>
+<div class="sl-block" data-block-type="image" data-block-id="05b24962af0ef823041fde0d46498efd" style="min-width: 30px; min-height: 30px; width: 128px; height: 128px; left: 730px; top: 496px;"><div class="sl-block-content" style="z-index: 32;"><img data-natural-width="512" data-natural-height="512" style="" data-lazy-loaded="" data-src="serverless-with-serverless/3d92d908ca8628d84ea3a85ffa90dc03.png"></div></div>
+<div class="sl-block" data-block-type="text" style="height: auto; width: 184px; left: 696px; top: 630px;" data-block-id="d8e0ba932052ce61aaaf265df37cca20"><div class="sl-block-content" data-placeholder-tag="p" data-placeholder-text="Text" style="z-index: 33;">
+<p>Price Service</p>
+</div></div></section><section data-id="b6833b79584936069886924a4bcca391"><div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 92px; height: auto;" data-block-id="cd3bf0db93da696d50eb12eb2a32228d"><div class="sl-block-content" data-placeholder-tag="h1" data-placeholder-text="Title Text" style="z-index: 11;">
+<h1>THE END</h1>
+</div></div>
+<div class="sl-block" data-block-type="text" style="width: 806px; left: 77px; top: 222px; height: auto;" data-block-id="8507acb9f37b1f41b88a1bcff7f101be"><div class="sl-block-content" data-placeholder-tag="h2" data-placeholder-text="Subtitle" style="z-index: 12;">
+<ul>
+	<li><a href="https://github.com/ShawnAukstak/dogecoin-serverless-tracker" target="_blank">Dogecoin Serverless Tracker</a></li>
+	<li><a href="https://github.com/shekhargulati/hands-on-serverless-guide" target="_blank">Hands-on Serverless Guide</a></li>
+	<li><a href="https://www.amazon.com/Serverless-Architectures-AWS-examples-Lambda/dp/1617293822" target="_blank">Serverless Architecture on AWS</a></li>
+	<li>
+<a href="https://github.com/pmuens/serverless-book" target="_blank">T</a><a href="https://github.com/pmuens/serverless-book" target="_blank">he Serverless Book</a>
+</li>
+	<li><a href="https://martinfowler.com/articles/serverless.html" target="_blank">Serverless Architectures by Martin Fowler</a></li>
+	<li><a href="https://softwareengineeringdaily.com/" target="_blank">Software Engineering Daily</a></li>
+</ul>
+</div></div></section>
+			</div>
+		</div>
+
+		<script>
+			var SLConfig = {"deck": {"id":1178024,"slug":"serverless-with-serverless","title":"Serverless with serverless","description":"","width":960,"height":700,"visibility":"self","published_at":null,"sanitize_messages":null,"thumbnail_url":"https://s3.amazonaws.com/media-p.slid.es/thumbnails/96c1a0289e07f5b41059c2bb74be3f88/thumb.jpg?1518968834","view_count":0,"user":{"id":832949,"username":"shawnaukstakalnis","name":"Shawn Aukstakalnis","description":null,"thumbnail_url":"https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg","paid":true,"pro":false,"lite":true,"team_id":null,"settings":{"id":768044,"present_controls":true,"present_upsizing":true,"present_pointer":false,"present_notes":true,"default_deck_tag_id":null}},"background_transition":"slide","transition":"slide","theme_id":null,"theme_font":"montserrat","theme_color":"grey-blue","auto_slide_interval":0,"comments_enabled":true,"forking_enabled":false,"rolling_links":false,"center":false,"should_loop":false,"share_notes":false,"slide_number":false,"slide_count":18,"rtl":false,"version":2,"collaborative":null,"deck_user_editor_limit":1,"data_updated_at":1519077678961,"font_typekit":null,"font_google":null,"notes":{}}};
+
+
+			// Use local fonts
+			SLConfig.fonts_url = 'lib/fonts/';
+		</script>
+
+		<script src="lib/head.min.js"></script>
+		<script src="lib/reveal.min.js"></script>
+		<script src="lib/offline.js"></script>
+
+		<!-- Initialize the presentation -->
+		<script>
+			Reveal.initialize({
+				width: 960,
+				height: 700,
+				margin: 0.05,
+
+				controls: true,
+				progress: true,
+				history: true,
+				mouseWheel: false,
+				showNotes: false,
+				slideNumber: false,
+
+				autoSlide: 0 || 0,
+				autoSlideStoppable: true,
+
+				center: false,
+				loop: false,
+				rtl: false,
+
+				transition: "slide",
+				backgroundTransition: "slide",
+
+				dependencies: [
+					{ src: 'lib/reveal-plugins/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'lib/reveal-plugins/highlight/highlight.js', async: true, callback: function() { hljs.initHighlighting(); hljs.initHighlightingOnLoad(); } },
+					{ src: 'lib/reveal-plugins/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+
+		
+
+	</body>
+</html>
